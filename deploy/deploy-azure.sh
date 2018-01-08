@@ -17,7 +17,11 @@ az group deployment create \
     --resource-group $AZURE_RG_NAME \
     --template-file "./deployments/deployment/app/azuredeploy.json" \
     --parameters "@./deployments/deployment/app/azuredeploy.parameters.json" \
+    if [ $1 ] && [ $1 = '--debug' ];then
+    --debug
+    else
     --verbose 
+    fi
 if [ -e ./deployments/deployment/db/azuredeploy.parameters.json ]; then
     az group deployment create \
         --name $AZURE_DB_DEPLOYMENT_NAME \
@@ -25,7 +29,11 @@ if [ -e ./deployments/deployment/db/azuredeploy.parameters.json ]; then
         --resource-group $AZURE_RG_NAME \
         --template-file "./deployments/deployment/db/azuredeploy.json" \
         --parameters "@./deployments/deployment/db/azuredeploy.parameters.json" \
+        if [ $1 ] && [ $1 = '--debug' ];then
+        --debug
+        else
         --verbose 
+        fi
 else
     echo -e "DB Setup skipped"
 fi
