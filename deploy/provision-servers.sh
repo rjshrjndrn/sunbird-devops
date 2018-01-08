@@ -41,6 +41,6 @@ docker run \
 	-v ~/.azure:/root/.azure \
 	-w /gopath/src/github.com/Azure/acs-engine \
 	--rm \
-	acs-engine /bin/bash ./scripts/deploy-azure.sh
+	acs-engine /bin/bash ./scripts/deploy-azure.sh $1
 
 chown -R "$(logname):$(id -gn $(logname))" . ~/.azure
