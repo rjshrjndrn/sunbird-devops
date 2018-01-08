@@ -34,8 +34,9 @@ sunbird_es_host: 10.1.0.4   #Private IP of Elastic Search server. If ES cluster 
 ```
 4. Installing DBs  
  `cd sunbird-devops/deploy`   
-`sudo ./install-dbs.sh  mysb dev deploy`
-
+`sudo ./install-dbs.sh <implementation-name>-devops/ansible/inventories/<environment-name>`  
+eg:  
+`sudo ./install-dbs.sh mysb-devops/ansible/inventories/dev`
 
 5. Initializing DBs  
 `sudo ./init-dbs <implementation-name>-devops/ansible/inventories/<environment-name>`  
