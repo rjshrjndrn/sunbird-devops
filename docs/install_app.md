@@ -1,52 +1,10 @@
-### SSH to app server
-
-**Error**
-ansible-playbook not found
-copied groupvars/dev from db server
-
-`sudo ./deploy-core.sh ~/mysb-devops/ansible/inventories/dev`
-
-```
-TASK [stack-sunbird : Save service configurations into an env file] ******************************************************************************************
-fatal: [localhost]: FAILED! => {"changed": false, "msg": "AnsibleUndefinedVariable: 'sunbird_msg_91_auth' is undefined"}
-  to retry, use: --limit @/home/ops/sunbird-devops/ansible/deploy.retry
-
-PLAY RECAP ***************************************************************************************************************************************************
-localhost                  : ok=5    changed=0    unreachable=0    failed=1
-```
-
-_**Manoj**: use release 1.4_
-
-> It worked, finished with ignore errors
-
-## CONFIGURING KEYCLOAK ???
+# Deploying application and core services
 
 
-# Using old documentation for configuring app server
+**Prerequisites**
 
-**Creating selfsigned certs**
-```mkdir cert
-cd certs
-openssl genrsa -out "root-ca.key" 4096
-openssl req \
-       -new -key "root-ca.key" \
-       -out "root-ca.csr" -sha256 \
-       -subj '/C=IN/ST=KA/L=Bengaluru/O=Sunbird/CN=Sunbird Example CA'
-vim root-ca.cnf
-openssl x509 -req  -days 3650  -in "root-ca.csr" \
-            -signkey "root-ca.key" -sha256 -out "root-ca.crt" \
-            -extfile "root-ca.cnf" -extensions \
-            root_ca
-openssl genrsa -out "site.key" 4096
-openssl req -new -key "site.key" -out "site.csr" -sha256 \
-      -subj '/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost'
+1. SSL certificates - public or [self-signed](self-signed-certs.md)
 
-vim site.cnf 
-
-openssl x509 -req -days 750 -in "site.csr" -sha256 \
--CA "root-ca.crt" -CAkey "root-ca.key"  -CAcreateserial \
--out "site.crt" -extfile "site.cnf" -extensions server
-```
 ```
 vim mysb-devops/ansible/inventories/dev/group_vars/dev
 cd sunbird-devops/deploy
