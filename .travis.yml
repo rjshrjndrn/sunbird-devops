@@ -19,6 +19,6 @@ install:
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
 
 script:
-  - bash deploy/sunbird_install.sh
+  - bash deploy/sunbird_install.sh -s config
  # - ./test.sh
  
