@@ -21,5 +21,4 @@ install:
 script:
   - sh deploy/sunbird_install.sh -s config
  # - ./test.sh
-  - ./deploy/sunbird-install.sh -s config
-  # - ./test.sh
+ 
