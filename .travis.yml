@@ -20,8 +20,8 @@ install:
 before_script: cd deploy/
 script:
 
-  - bash sunbird_install.sh -s config
-  - bash sunbird_install.sh -s dbs
+  - bash sunbird_install.sh
+  # - bash sunbird_install.sh -s dbs
   # - bash sunbird_install.sh -s apis
   # - bash sunbird_install.sh -s proxy
   # - bash sunbird_install.sh -s keycloak
