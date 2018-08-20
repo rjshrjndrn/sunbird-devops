@@ -22,10 +22,10 @@ script:
 
   - bash sunbird_install.sh -s config
   - bash sunbird_install.sh -s dbs
-  - bash sunbird_install.sh -s apis
-  - bash sunbird_install.sh -s proxy
-  - bash sunbird_install.sh -s keycloak
-  - bash sunbird_install.sh -s badger
-  - bash sunbird_install.sh -s core
+  # - bash sunbird_install.sh -s apis
+  # - bash sunbird_install.sh -s proxy
+  # - bash sunbird_install.sh -s keycloak
+  # - bash sunbird_install.sh -s badger
+  # - bash sunbird_install.sh -s core
  # - ./test.sh
  
