@@ -23,7 +23,7 @@ if [[ ! -z ${1:-} ]] && [[  ${1} != -* ]]; then
 fi
 
 # Sourcing versions of images
-source deploy/version.env
+source version.env
 
 # Reading environment and implementation name
 implementation_name=$(awk '/implementation_name: /{ if ($2 !~ /#.*/) {print $2}}' config)

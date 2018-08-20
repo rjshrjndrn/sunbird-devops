@@ -17,8 +17,15 @@ before_install:
 install:
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; fi #else pip install ansible==$ANSIBLE_VERSION; fi
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
-
+before_script: cd deploy/
 script:
-  - bash deploy/sunbird_install.sh
+
+  - bash sunbird_install.sh -s config
+  - bash sunbird_install.sh -s dbs
+  - bash sunbird_install.sh -s apis
+  - bash sunbird_install.sh -s proxy
+  - bash sunbird_install.sh -s keycloak
+  - bash sunbird_install.sh -s badger
+  - bash sunbird_install.sh -s core
  # - ./test.sh
  
