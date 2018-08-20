@@ -19,7 +19,7 @@ sudo_passwd:                                    # If user have sudo password, el
 ansible_private_key_path: ciTestKey.pem                      # Path to the private key file to allow ansible to deploy
 
 #Application
-application_host:  172.31.30.199                             # Private ip of the application server
+application_host:  13.232.188.44                             # Private ip of the application server
 app_address_space:  172.0.0.0/24                            # Application server address space (e.g. 10.3.0.0/24)
 
 #Proxy
@@ -29,7 +29,7 @@ cert_path:                                      # Path to .cert file for nginx
 key_path:                                       # Path to .key file for nginx
 
 #Database
-database_host: 172.31.17.233                                 # Db server private ip 
+database_host:   13.127.235.204                               # Db server private ip 
 database_password: password                             # Common password for all the databases
  
 #Keycloak 
