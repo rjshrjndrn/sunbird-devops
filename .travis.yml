@@ -20,6 +20,7 @@ install:
 before_script: cd deploy/
 script:
 
+  - readlink -f ciTestKey.pem
   - bash sunbird_install.sh
   # - bash sunbird_install.sh -s dbs
   # - bash sunbird_install.sh -s apis
