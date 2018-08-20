@@ -20,7 +20,7 @@ ansible_private_key_path: ciTestKey.pem                      # Path to the priva
 
 #Application
 application_host:  13.232.188.44                             # Private ip of the application server
-app_address_space:  172.0.0.0/24                            # Application server address space (e.g. 10.3.0.0/24)
+app_address_space:  172.31.30.0/24                            # Application server address space (e.g. 10.3.0.0/24)
 
 #Proxy
 dns_name: 13.232.188.44                                      # Public DNS url of the app the server / ip address of your server or load balancer
