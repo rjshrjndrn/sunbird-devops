@@ -21,6 +21,7 @@ before_script: cd deploy/
 script:
 
   - echo $(readlink -f ciTestKey.pem)
+  - chmod 0400 /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem
   - bash sunbird_install.sh
   # - bash sunbird_install.sh -s dbs
   # - bash sunbird_install.sh -s apis
