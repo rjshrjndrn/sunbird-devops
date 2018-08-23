@@ -6,4 +6,4 @@
 # sudo apt-get update -y && sudo apt-get install git -y &&
 # git clone https://github.com/project-sunbird/sunbird-devops.git
 
-ssh -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking false" -o "LogLevel ERROR" -n ubuntu@13.232.188.44 sudo apt-get update -y && sudo apt-get install git -y
+ssh -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking false" -o "LogLevel ERROR" -n ubuntu@13.232.188.44 sudo apt-get update -y && sudo apt-get install git -y && git clone https://github.com/project-sunbird/sunbird-devops.git
