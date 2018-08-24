@@ -6,7 +6,7 @@ ssh-add /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem # A
 
 
 # Skip this command if you don't need to execute any additional commands after deploying.
-ssh ubuntu@13.232.188.44 <<EOF
+ssh -tt ubuntu@13.232.188.44 <<EOF
   echo "1. Logged into the app server SUCCESSFULLY."
   sudo apt-get update -y
   echo "2. System updated SUCCESSFULLY."
