@@ -12,11 +12,11 @@ env:
 
 before_install:
   - sudo apt-get update -qq
-  - chmod +x deploy/sunbird_install.sh
+  # - chmod +x deploy/sunbird_install.sh
 
 install:
-  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; fi #else pip install ansible==$ANSIBLE_VERSION; fi
-  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
+  # - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; fi #else pip install ansible==$ANSIBLE_VERSION; fi
+  # - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
 # before_script: cd deploy/
 script:
   - bash install.sh

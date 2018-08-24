@@ -10,4 +10,5 @@ nssh() {
     ssh -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking false" -o "LogLevel ERROR" $@
     return $?
 }
-nssh -i /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem ubuntu@13.232.188.44 sudo apt-get update -y && sudo apt-get install git -y && eval `ssh-agent -s` && ssh-add /home/ubuntu/ciTestKey.pem && git clone https://github.com/rajeevsathish/sunbird-devops.git && cd sunbird-devops/deploy && ./sunbird_install.sh
+# nssh -i /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem ubuntu@13.232.188.44 sudo apt-get update -y && sudo apt-get install git -y && eval `ssh-agent -s` && ssh-add /home/ubuntu/ciTestKey.pem && git clone https://github.com/rajeevsathish/sunbird-devops.git && cd sunbird-devops/deploy && ./sunbird_install.sh
+nssh -i /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem ubuntu@13.232.188.44 echo "Test"
