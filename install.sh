@@ -15,18 +15,20 @@ ssh ubuntu@13.232.188.44 <<EOF
   eval `ssh-agent -s`
   ssh-add /home/ubuntu/ciTestKey.pem
   echo "4. Identity added SUCCESSFULLY."
-  git clone https://github.com/rajeevsathish/sunbird-devops.git
+  echo "THE REPO VARIABLE VALUE IS =====> $repo"
+  git clone $repo
   echo "5. Installer downloaded SUCCESSFULLY."
   cd sunbird-devops/deploy
   echo "Sunbir installation starting..."
-  ./sunbird_install.sh
+  echo "INSTALLATION CODE SHOULD COME HERE"
+ 
 EOF
 
 
 
 
 #!/bin/sh
-
+# ./sunbird_install.sh
 # chmod 0400 /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem
 # ssh -i /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem -o CheckHostIP=no -o StrictHostKeyChecking=no ubuntu@13.232.188.44
 # &&
