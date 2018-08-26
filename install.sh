@@ -21,7 +21,7 @@ ssh -tt ubuntu@$dns_name <<EOF
   cd sunbird-devops/deploy
   echo "Sunbir installation starting..."
   echo "INSTALLATION CODE SHOULD COME HERE"
- 
+  ./sunbird_install.sh
 EOF
 
 
