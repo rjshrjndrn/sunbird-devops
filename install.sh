@@ -4,20 +4,20 @@ eval "$(ssh-agent -s)" # Start ssh-agent cache
 chmod 600 /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem # Allow read access to the private key
 ssh-add /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem # Add the private key to SSH
 
-scp /home/travis/build/configuration ubuntu@13.232.188.44:.
 # Skip this command if you don't need to execute any additional commands after deploying.
-ssh -tt ubuntu@13.232.188.44 <<EOF
+ssh -tt ubuntu@$dns_name <<EOF
   echo "1. Logged into the app server SUCCESSFULLY."
   sudo apt-get update -y
   echo "2. System updated SUCCESSFULLY."
   sudo apt-get install git -y
   echo "3. Git installed SUCCESSFULLY."
-  eval `ssh-agent -s`
-  ssh-add /home/ubuntu/ciTestKey.pem
   echo "4. Identity added SUCCESSFULLY."
   echo "THE REPO VARIABLE VALUE IS =====> $repo"
   git clone $repo
   echo "5. Installer downloaded SUCCESSFULLY."
+  eval `ssh-agent -s`
+  ssh-add /home/ubuntu/sunbird-devops/deploy/ciTestKey.pem
+  echo "6. ssh added SUCCESSFULLY."
   cd sunbird-devops/deploy
   echo "Sunbir installation starting..."
   echo "INSTALLATION CODE SHOULD COME HERE"

@@ -17,7 +17,7 @@ env:  testing                                          # Name of the environment
 implementation_name:  testSunbird                          # Name of your sunbird implementation. Let's say for the sake of this document, it is ntp. 
 ssh_ansible_user:    ubuntu                           # Ssh user for accessing all servers, who must be a sudo user
 sudo_passwd:                                    # If user have sudo password, else please skip it
-ansible_private_key_path: /home/ubuntu/ciTestKey.pem                      # Path to the private key file to allow ansible to deploy
+ansible_private_key_path: /home/ubuntu/sunbird-devops/deploy/ciTestKey.pem                      # Path to the private key file to allow ansible to deploy
 
 #Application
 application_host:  172.31.30.199                             # Private ip of the application server
