@@ -4,7 +4,7 @@ eval "$(ssh-agent -s)" # Start ssh-agent cache
 chmod 600 /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem # Allow read access to the private key
 ssh-add /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem # Add the private key to SSH
 
-
+scp /home/travis/build/configuration ubuntu@13.232.188.44:.
 # Skip this command if you don't need to execute any additional commands after deploying.
 ssh -tt ubuntu@13.232.188.44 <<EOF
   echo "1. Logged into the app server SUCCESSFULLY."
