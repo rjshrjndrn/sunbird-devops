@@ -23,7 +23,8 @@ install:
   # - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; fi #else pip install ansible==$ANSIBLE_VERSION; fi
   # - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
 before_script: 
-  ./createConfig.sh
+  - bash createConfig.sh
+  echo configuration
 
 script:
   #- bash install.sh
