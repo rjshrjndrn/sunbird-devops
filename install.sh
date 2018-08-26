@@ -19,6 +19,9 @@ ssh -tt ubuntu@$dns_name <<EOF
   ssh-add /home/ubuntu/sunbird-devops/deploy/ciTestKey.pem
   echo "6. ssh added SUCCESSFULLY."
   cd sunbird-devops/deploy
+  eval `ssh-agent -s`
+  ssh-add ciTestKey.pem
+  chmod 0400 ciTestKey.pem
   echo "Sunbir installation starting..."
   echo "INSTALLATION CODE SHOULD COME HERE"
   ./sunbird_install.sh
