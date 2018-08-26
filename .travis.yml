@@ -24,7 +24,7 @@ install:
   # - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
 before_script: 
   - bash createConfig.sh
-  echo configuration
+  - echo configuration
 
 script:
   #- bash install.sh
