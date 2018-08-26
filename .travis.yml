@@ -27,7 +27,7 @@ before_script:
   - echo $(readlink -f configuration)
 
 script:
-  #- bash install.sh
+  - bash install.sh
   # - echo $(readlink -f ciTestKey.pem)
   # - chmod 0400 /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem
   # - bash sunbird_install.sh
