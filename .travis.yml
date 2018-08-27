@@ -22,9 +22,9 @@ before_install:
 install:
   # - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; fi #else pip install ansible==$ANSIBLE_VERSION; fi
   # - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
-#before_script: 
-  # - bash createConfig.sh
-
+  - pip install pyyaml
+before_script: 
+- python createConfigYml.py
 script:
   - bash install.sh
   # - echo $(readlink -f ciTestKey.pem)
