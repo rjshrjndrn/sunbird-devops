@@ -6,5 +6,6 @@ configElement = ['env','implementation_name','ssh_ansible_user','sudo_passwd','a
 with open(fname, "w") as f:
    for key in configElement:
       configLine = key + ': ' + "NULL \n" if os.getenv(key) is None else os.getenv(key)+'\n'
+      print configLine
       f.write(configLine)
 
