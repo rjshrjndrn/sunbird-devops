@@ -25,6 +25,7 @@ install:
   - pip install pyyaml
 before_script: 
 - python createConfigYml.py
+- echo $(readlink -f configuration.yml)
 script:
   - bash install.sh
   # - echo $(readlink -f ciTestKey.pem)
