@@ -24,7 +24,6 @@ ssh -tt ubuntu@$dns_name <<EOF
   chmod 0400 ciTestKey.pem
   echo "Sunbir installation starting..."
   echo "INSTALLATION CODE SHOULD COME HERE"
-  ./sunbird_install.sh
 EOF
 
 
