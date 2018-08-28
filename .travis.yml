@@ -38,4 +38,6 @@ script:
   # - bash sunbird_install.sh -s badger
   # - bash sunbird_install.sh -s core
  # - ./test.sh
- 
+after_success:
+  
+after_failure:

@@ -1,0 +1,2 @@
+list_groups=$(curl -X POST http://13.232.188.44/auth/realms/sunbird/protocol/openid-connect/token -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' -d 'client_id=admin-cli&username=admin&password=admin&grant_type=password')
+echo "${list_groups}"
