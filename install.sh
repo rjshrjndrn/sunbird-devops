@@ -16,10 +16,10 @@ ssh -tt ubuntu@$dns_name <<EOF
   echo "THE REPO VARIABLE VALUE IS =====> $repo"
   git clone $repo
   echo "5. Installer downloaded SUCCESSFULLY."
+  cp config sunbird-devops/deploy
   eval `ssh-agent -s`
   ssh-add /home/ubuntu/sunbird-devops/deploy/ciTestKey.pem
   echo "6. ssh added SUCCESSFULLY."
-  cp config sunbird-devops/deploy
   cd sunbird-devops/deploy
   eval `ssh-agent -s`
   ssh-add ciTestKey.pem
