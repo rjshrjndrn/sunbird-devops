@@ -10,6 +10,7 @@ scp /home/travis/build/rajeevsathish/sunbird-devops/getSSOKey.py ubuntu@$dns_nam
 # Skip this command if you don't need to execute any additional commands after deploying.
 ssh -tt ubuntu@$dns_name <<EOF
   echo "1. Logged into the app server SUCCESSFULLY."
+  pip install pyyaml
   sudo apt-get update -y
   echo "2. System updated SUCCESSFULLY."
   sudo apt-get install git -y
@@ -26,7 +27,7 @@ ssh -tt ubuntu@$dns_name <<EOF
   chmod 0400 ciTestKey.pem
   echo "Sunbir installation starting..."
   echo "INSTALLATION CODE SHOULD COME HERE"
-  ./sunbird_install1.sh; echo "Installation phase ONE complete"; python /home/ubuntu/getSSOKey.py; echo "******************************";
+  ./sunbird_install.sh; echo "Installation phase ONE complete";echo "Updating the config for SSO_KEY"; python /home/ubuntu/getSSOKey.py; cp config sunbird-devops/deploy ;./sunbird_install.sh -s core
 EOF
 echo "--------------------------------------------------------"
 echo "I am trying to run this script to see where it executes"
