@@ -1,10 +1,11 @@
 #!/bin/bash
 
 eval "$(ssh-agent -s)" # Start ssh-agent cache
-chmod 600 /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem # Allow read access to the private key
-ssh-add /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem # Add the private key to SSH
+chmod 600 /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem # Allow read access to the private key
+ssh-add /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem # Add the private key to SSH
 
-scp /home/travis/build/rajeevsathish/sunbird-devops/deploy/ciTestKey.pem ubuntu@$dns_name:.
+scp /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name:.
+scp /home/travis/build/rajeevsathish/sunbird-devops/getSSOKey.py ubuntu@$dns_name:.
 # Skip this command if you don't need to execute any additional commands after deploying.
 ssh -tt ubuntu@$dns_name <<EOF
   echo "1. Logged into the app server SUCCESSFULLY."
@@ -17,6 +18,7 @@ ssh -tt ubuntu@$dns_name <<EOF
   git clone $repo
   echo "5. Installer downloaded SUCCESSFULLY."
   cp config sunbird-devops/deploy
+  cp getSSOKey.py sunbird-devops/deploy
   echo "6. ssh added SUCCESSFULLY."
   cd sunbird-devops/deploy
   eval `ssh-agent -s`
