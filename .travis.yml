@@ -23,9 +23,6 @@ install:
   # - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; fi #else pip install ansible==$ANSIBLE_VERSION; fi
   # - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
   - pip install pyyaml
-  - pip install subprocess
-  - pip install json
-  - pip install shlex
 before_script: 
 - python createConfigYml.py
 - echo $(readlink -f configuration.yml)
