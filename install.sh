@@ -26,10 +26,7 @@ ssh -tt ubuntu@$dns_name <<EOF
   chmod 0400 ciTestKey.pem
   echo "Sunbir installation starting..."
   echo "INSTALLATION CODE SHOULD COME HERE"
-  ./sunbird_install1.sh
-  echo "Installation phase ONE complete"
-  python /home/ubuntu/getSSOKey.py
-  echo "******************************"
+  ./sunbird_install1.sh; echo "Installation phase ONE complete"; python /home/ubuntu/getSSOKey.py; echo "******************************";
 EOF
 echo "--------------------------------------------------------"
 echo "I am trying to run this script to see where it executes"
