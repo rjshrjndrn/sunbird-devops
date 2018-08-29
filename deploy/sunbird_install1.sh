@@ -75,33 +75,33 @@ ansible-playbook -i $ansible_variable_path/hosts ../ansible/setup-dockerswarm.ym
 dbs() { ./install-dbs.sh $ansible_variable_path; ./init-dbs.sh $ansible_variable_path; }
 
 # Apis
-apis() { ./deploy-apis.sh $ansible_variable_path; }
+# apis() { ./deploy-apis.sh $ansible_variable_path; }
 
-# Proxy
-proxy() { ./deploy-proxy.sh $ansible_variable_path; }
+# # Proxy
+# proxy() { ./deploy-proxy.sh $ansible_variable_path; }
 
-# Keycloak
-keycloak() {  
-    ./provision-keycloak.sh $ansible_variable_path
-    ./deploy-keycloak-vm.sh $ansible_variable_path 
-    sleep 15
-    ./bootstrap-keycloak.sh $ansible_variable_path
-}
+# # Keycloak
+# keycloak() {  
+#     ./provision-keycloak.sh $ansible_variable_path
+#     ./deploy-keycloak-vm.sh $ansible_variable_path 
+#     sleep 15
+#     ./bootstrap-keycloak.sh $ansible_variable_path
+# }
 
-# badger
-badger() { ./deploy-badger.sh $ansible_variable_path; }
+# # badger
+# badger() { ./deploy-badger.sh $ansible_variable_path; }
 
-# Core
-core() { ./deploy-core.sh $ansible_variable_path; }
+# # Core
+# core() { ./deploy-core.sh $ansible_variable_path; }
 
-# Logger
-logger() { ./deploy-logger.sh $ansible_variable_path; }
+# # Logger
+# logger() { ./deploy-logger.sh $ansible_variable_path; }
 
-# Monitor
-monitor() { ./deploy-monitor.sh $ansible_variable_path; }
+# # Monitor
+# monitor() { ./deploy-monitor.sh $ansible_variable_path; }
 
-#Post Installation Testing
-posttest() { ./postInstallation.sh $ansible_private_key_path $ssh_ansible_user $protocol $domainname; }
+# #Post Installation Testing
+# posttest() { ./postInstallation.sh $ansible_private_key_path $ssh_ansible_user $protocol $domainname; }
 
 # while getopts "s:h" o;do
 #     case "${o}" in
