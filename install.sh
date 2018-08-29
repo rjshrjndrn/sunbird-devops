@@ -31,8 +31,9 @@ ssh -tt ubuntu@$dns_name <<EOF
   python /home/ubuntu/getSSOKey.py
   echo "******************************"
 EOF
-
-
+echo "--------------------------------------------------------"
+echo "I am trying to run this script to see where it executes"
+echo "--------------------------------------------------------"
 
   # if [ $? = 0 ]; then python /home/ubuntu/getSSOKey.py;else python /home/ubuntu/getSSOKey.py; if
 

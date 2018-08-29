@@ -194,6 +194,6 @@ echo -e \n$(date)\n >> logs/badger.log; badger 2>&1 | tee -a logs/badger.log
 
 
 
- echo "Installation phase ONE complete"
+ echo "Installation phase ONE complete1234"
   python /home/ubuntu/getSSOKey.py
-  echo "******************************"
+  echo "******************************+++++"
