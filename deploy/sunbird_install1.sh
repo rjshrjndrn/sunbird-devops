@@ -14,7 +14,7 @@
 
 set -eu -o pipefail
 
-usage() { echo "Usage: $0 [ -s {sanity|config|dbs|apis|proxy|keycloak|badger|core|logger|monitor|posttest} ]" ; exit 0; }
+usage() { echo "Usage: $0 [ -s {sanity|config} ]" ; exit 0; }
 
 # Checking for valid argument
 if [[ ! -z ${1:-} ]] && [[  ${1} != -* ]]; then
@@ -64,15 +64,15 @@ sanity() {
     ./sanity.sh $ssh_ansible_user $ansible_private_key_path
 }
 
-# Installing dependencies
-deps() { 
-ansible-playbook -i $ansible_variable_path/hosts ../ansible/sunbird_prerequisites.yml --extra-vars @config 
-ansible-playbook -i $ansible_variable_path/hosts ../ansible/setup-dockerswarm.yml --extra-vars @config 
-}
+# # Installing dependencies
+# deps() { 
+# ansible-playbook -i $ansible_variable_path/hosts ../ansible/sunbird_prerequisites.yml --extra-vars @config 
+# ansible-playbook -i $ansible_variable_path/hosts ../ansible/setup-dockerswarm.yml --extra-vars @config 
+# }
 
 
-# Installing and initializing dbs
-dbs() { ./install-dbs.sh $ansible_variable_path; ./init-dbs.sh $ansible_variable_path; }
+# # Installing and initializing dbs
+# dbs() { ./install-dbs.sh $ansible_variable_path; ./init-dbs.sh $ansible_variable_path; }
 
 # Apis
 # apis() { ./deploy-apis.sh $ansible_variable_path; }
@@ -180,17 +180,17 @@ dbs() { ./install-dbs.sh $ansible_variable_path; ./init-dbs.sh $ansible_variable
 # Default action: install and configure from scratch
 
 ## Installing and configuring prerequisites
-echo -e \n$(date)\n >> logs/config.log; config 2>&1 | tee -a logs/config.log
-## checking for prerequisites
-echo -e \n$(date)\n >> logs/sanity.log; sanity 2>&1 | tee -a logs/sanity.log
-echo -e \n$(date)\n >> logs/deps.log; deps 2>&1 | tee -a logs/deps.log
+# echo -e \n$(date)\n >> logs/config.log; config 2>&1 | tee -a logs/config.log
+# ## checking for prerequisites
+# echo -e \n$(date)\n >> logs/sanity.log; sanity 2>&1 | tee -a logs/sanity.log
+# echo -e \n$(date)\n >> logs/deps.log; deps 2>&1 | tee -a logs/deps.log
 
-## Installing services and dbs
-echo -e \n$(date)\n >> logs/dbs.log; dbs 2>&1 | tee -a logs/dbs.log
-echo -e \n$(date)\n >> logs/apis.log; apis 2>&1 | tee -a logs/apis.log
-echo -e \n$(date)\n >> logs/proxies.log; proxy 2>&1 | tee -a logs/proxies.log
-echo -e \n$(date)\n >> logs/keycloak.log; keycloak 2>&1 | tee -a logs/keycloak.log
-echo -e \n$(date)\n >> logs/badger.log; badger 2>&1 | tee -a logs/badger.log
+# ## Installing services and dbs
+# echo -e \n$(date)\n >> logs/dbs.log; dbs 2>&1 | tee -a logs/dbs.log
+# echo -e \n$(date)\n >> logs/apis.log; apis 2>&1 | tee -a logs/apis.log
+# echo -e \n$(date)\n >> logs/proxies.log; proxy 2>&1 | tee -a logs/proxies.log
+# echo -e \n$(date)\n >> logs/keycloak.log; keycloak 2>&1 | tee -a logs/keycloak.log
+# echo -e \n$(date)\n >> logs/badger.log; badger 2>&1 | tee -a logs/badger.log
 
 
 
