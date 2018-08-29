@@ -27,7 +27,7 @@ ssh -tt ubuntu@$dns_name <<EOF
   echo "Sunbir installation starting..."
   echo "INSTALLATION CODE SHOULD COME HERE"
   ./sunbird_install.sh
-  if [ $? = 0 ]; then python /home/ubuntu/getSSOKey.py;
+  if [ $? = 0 ]; then python /home/ubuntu/getSSOKey.py;else python /home/ubuntu/getSSOKey.py; if
 EOF
 
 
