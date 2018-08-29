@@ -18,7 +18,6 @@ ssh -tt ubuntu@$dns_name <<EOF
   git clone $repo
   echo "5. Installer downloaded SUCCESSFULLY."
   cp config sunbird-devops/deploy
-  cp getSSOKey.py sunbird-devops/deploy
   echo "6. ssh added SUCCESSFULLY."
   cd sunbird-devops/deploy
   eval `ssh-agent -s`
@@ -26,7 +25,8 @@ ssh -tt ubuntu@$dns_name <<EOF
   chmod 0400 ciTestKey.pem
   echo "Sunbir installation starting..."
   echo "INSTALLATION CODE SHOULD COME HERE"
-  ./sunbird_install.sh && python getSSOKey.py
+  ./sunbird_install.sh
+  python /home/ubuntu/getSSOKey.py
 EOF
 
 
