@@ -189,7 +189,7 @@ echo -e \n$(date)\n >> logs/sanity.log; sanity 2>&1 | tee -a logs/sanity.log
 # echo -e \n$(date)\n >> logs/dbs.log; dbs 2>&1 | tee -a logs/dbs.log
 # echo -e \n$(date)\n >> logs/apis.log; apis 2>&1 | tee -a logs/apis.log
 # echo -e \n$(date)\n >> logs/proxies.log; proxy 2>&1 | tee -a logs/proxies.log
-# echo -e \n$(date)\n >> logs/keycloak.log; keycloak 2>&1 | tee -a logs/keycloak.log
+echo -e \n$(date)\n >> logs/keycloak.log; keycloak 2>&1 | tee -a logs/keycloak.log
 echo -e \n$(date)\n >> logs/badger.log; badger 2>&1 | tee -a logs/badger.log
 
 exit 0;
