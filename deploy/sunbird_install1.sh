@@ -14,7 +14,7 @@
 
 set -eu -o pipefail
 
-usage() { echo "Usage: $0 [ -s {sanity|config} ]" ; exit 0; }
+usage() { echo "Usage: $0 [ -s {sanity|config|keycloak|badger} ]" ; exit 0; }
 
 # Checking for valid argument
 if [[ ! -z ${1:-} ]] && [[  ${1} != -* ]]; then
@@ -180,17 +180,17 @@ sanity() {
 # Default action: install and configure from scratch
 
 ## Installing and configuring prerequisites
-# echo -e \n$(date)\n >> logs/config.log; config 2>&1 | tee -a logs/config.log
+echo -e \n$(date)\n >> logs/config.log; config 2>&1 | tee -a logs/config.log
 # ## checking for prerequisites
-# echo -e \n$(date)\n >> logs/sanity.log; sanity 2>&1 | tee -a logs/sanity.log
+echo -e \n$(date)\n >> logs/sanity.log; sanity 2>&1 | tee -a logs/sanity.log
 # echo -e \n$(date)\n >> logs/deps.log; deps 2>&1 | tee -a logs/deps.log
 
 # ## Installing services and dbs
 # echo -e \n$(date)\n >> logs/dbs.log; dbs 2>&1 | tee -a logs/dbs.log
 # echo -e \n$(date)\n >> logs/apis.log; apis 2>&1 | tee -a logs/apis.log
 # echo -e \n$(date)\n >> logs/proxies.log; proxy 2>&1 | tee -a logs/proxies.log
-# echo -e \n$(date)\n >> logs/keycloak.log; keycloak 2>&1 | tee -a logs/keycloak.log
-# echo -e \n$(date)\n >> logs/badger.log; badger 2>&1 | tee -a logs/badger.log
+echo -e \n$(date)\n >> logs/keycloak.log; keycloak 2>&1 | tee -a logs/keycloak.log
+echo -e \n$(date)\n >> logs/badger.log; badger 2>&1 | tee -a logs/badger.log
 
 
 
