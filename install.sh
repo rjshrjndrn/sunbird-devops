@@ -5,6 +5,7 @@ chmod 600 /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem # Allow 
 ssh-add /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem # Add the private key to SSH
 
 scp /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name:.
+scp /home/travis/build/rajeevsathish/sunbird-devops/config ubuntu@$dns_name:.
 scp /home/travis/build/rajeevsathish/sunbird-devops/getSSOKey.py ubuntu@$dns_name:.
 # Skip this command if you don't need to execute any additional commands after deploying.
 ssh -tt ubuntu@$dns_name <<EOF
@@ -25,8 +26,7 @@ ssh -tt ubuntu@$dns_name <<EOF
   chmod 0400 ciTestKey.pem
   echo "Sunbir installation starting..."
   echo "INSTALLATION CODE SHOULD COME HERE"
-  ./sunbird_install.sh
-  python /home/ubuntu/getSSOKey.py
+  ./sunbird_install.sh && python /home/ubuntu/getSSOKey.py
 EOF
 
 
