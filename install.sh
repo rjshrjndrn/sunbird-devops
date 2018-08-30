@@ -7,8 +7,8 @@ ssh-add /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem # Add the 
 scp /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name:.
 scp /home/travis/build/rajeevsathish/sunbird-devops/config ubuntu@$dns_name:.
 scp /home/travis/build/rajeevsathish/sunbird-devops/getSSOKey.py ubuntu@$dns_name:.
-
-ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/sunbird-devops/stage1.sh
+scp /home/travis/build/rajeevsathish/sunbird-devops/stage1.sh ubuntu@$dns_name:.
+ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/stage1.sh
 echo $?
 # Skip this command if you don't need to execute any additional commands after deploying.
 # ssh -tt ubuntu@$dns_name <<EOF
