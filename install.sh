@@ -12,7 +12,7 @@ ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns
 echo $?
 if [ $? -eq 0 ]
 then
-  ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/stage2.sh
+  ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/sunbird-devops/stage2.sh
   exit 0
 else
   echo "The script failed" >&2
