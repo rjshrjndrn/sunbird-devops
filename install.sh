@@ -10,6 +10,14 @@ scp /home/travis/build/rajeevsathish/sunbird-devops/getSSOKey.py ubuntu@$dns_nam
 scp /home/travis/build/rajeevsathish/sunbird-devops/stage1.sh ubuntu@$dns_name:.
 ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/stage1.sh $repo
 echo $?
+if [ $? -eq 0 ]
+then
+  ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/stage2.sh
+  exit 0
+else
+  echo "The script failed" >&2
+  exit 1
+fi
 # Skip this command if you don't need to execute any additional commands after deploying.
 # ssh -tt ubuntu@$dns_name <<EOF
 #   echo "1. Logged into the app server SUCCESSFULLY."
