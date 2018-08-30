@@ -9,14 +9,30 @@ scp /home/travis/build/rajeevsathish/sunbird-devops/config ubuntu@$dns_name:.
 scp /home/travis/build/rajeevsathish/sunbird-devops/getSSOKey.py ubuntu@$dns_name:.
 scp /home/travis/build/rajeevsathish/sunbird-devops/stage1.sh ubuntu@$dns_name:.
 ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/stage1.sh $repo
-echo $?
 if [ $? -eq 0 ]
-then
-  ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/sunbird-devops/stage2.sh
-  exit 0
-else
-  echo "The script failed" >&2
-  exit 1
+  then
+    echo "Stage 1 SUCCESSFULL"
+    ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/sunbird-devops/stage2.sh
+    exit 0
+    if [ $? -eq 0 ]
+      then
+        echo "Stage 2 SUCCESSFULL"
+        ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/sunbird-devops/stage3.sh
+        exit 0
+        if [$? -eq 0]
+          then
+            echo "Stage 3 SUCCESSFULL"
+          else
+            echo "Stage 3 UNSUCCESSFULL" >&2
+            exit 1
+        fi
+      else
+        echo "Stage 2 UNSUCCESSFULL" >&2
+        exit 1
+    fi
+  else
+    echo "Stage 1 UNSUCCESSFULL" >&2
+    exit 1
 fi
 # Skip this command if you don't need to execute any additional commands after deploying.
 # ssh -tt ubuntu@$dns_name <<EOF
