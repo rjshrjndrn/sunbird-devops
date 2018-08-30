@@ -7,31 +7,34 @@ ssh-add /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem # Add the 
 scp /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name:.
 scp /home/travis/build/rajeevsathish/sunbird-devops/config ubuntu@$dns_name:.
 scp /home/travis/build/rajeevsathish/sunbird-devops/getSSOKey.py ubuntu@$dns_name:.
+
+ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name ./stage1
+echo $?
 # Skip this command if you don't need to execute any additional commands after deploying.
-ssh -tt ubuntu@$dns_name <<EOF
-  echo "1. Logged into the app server SUCCESSFULLY."
-  pip install pyyaml
-  sudo apt-get update -y
-  echo "2. System updated SUCCESSFULLY."
-  sudo apt-get install git -y
-  echo "3. Git installed SUCCESSFULLY."
-  echo "4. Identity added SUCCESSFULLY."
-  echo "THE REPO VARIABLE VALUE IS =====> $repo"
-  git clone $repo
-  echo "5. Installer downloaded SUCCESSFULLY."
-  cp config sunbird-devops/deploy
-  echo "6. ssh added SUCCESSFULLY."
-  cd sunbird-devops/deploy
-  eval `ssh-agent -s`
-  ssh-add ciTestKey.pem
-  chmod 0400 ciTestKey.pem
-  echo "Sunbir installation starting..."
-  echo "INSTALLATION CODE SHOULD COME HERE"
-  ./sunbird_install.sh; echo "Installation phase ONE complete";echo "Updating the config for SSO_KEY"; python /home/ubuntu/getSSOKey.py; cp config sunbird-devops/deploy ;./sunbird_install.sh -s core
-EOF
-echo "--------------------------------------------------------"
-echo "I am trying to run this script to see where it executes"
-echo "--------------------------------------------------------"
+# ssh -tt ubuntu@$dns_name <<EOF
+#   echo "1. Logged into the app server SUCCESSFULLY."
+#   pip install pyyaml
+#   sudo apt-get update -y
+#   echo "2. System updated SUCCESSFULLY."
+#   sudo apt-get install git -y
+#   echo "3. Git installed SUCCESSFULLY."
+#   echo "4. Identity added SUCCESSFULLY."
+#   echo "THE REPO VARIABLE VALUE IS =====> $repo"
+#   git clone $repo
+#   echo "5. Installer downloaded SUCCESSFULLY."
+#   cp config sunbird-devops/deploy
+#   echo "6. ssh added SUCCESSFULLY."
+#   cd sunbird-devops/deploy
+#   eval `ssh-agent -s`
+#   ssh-add ciTestKey.pem
+#   chmod 0400 ciTestKey.pem
+#   echo "Sunbir installation starting..."
+#   echo "INSTALLATION CODE SHOULD COME HERE"
+#   ./sunbird_install.sh; echo "Installation phase ONE complete";echo "Updating the config for SSO_KEY"; python /home/ubuntu/getSSOKey.py; cp config sunbird-devops/deploy ;./sunbird_install.sh -s core
+# EOF
+# echo "--------------------------------------------------------"
+# echo "I am trying to run this script to see where it executes"
+# echo "--------------------------------------------------------"
 
   # if [ $? = 0 ]; then python /home/ubuntu/getSSOKey.py;else python /home/ubuntu/getSSOKey.py; if
 
