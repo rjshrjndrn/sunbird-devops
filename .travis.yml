@@ -9,7 +9,13 @@ addons:
   ssh_known_hosts:
   - 13.232.188.44
   - 13.127.235.204
-
+notifications:
+  email:
+    recipients:
+      - rajeev.sathish1982@gmail.com
+      - gourishanker.bajaj@tarento.com
+    on_success: always
+    on_failure: always
 env:
   - ANSIBLE_VERSION=latest
   # - ANSIBLE_VERSION=2.4.1.0
