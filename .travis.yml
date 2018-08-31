@@ -7,8 +7,8 @@ python: "2.7"
 
 addons:
   ssh_known_hosts:
-  - 13.232.188.44
-  - 13.127.235.204
+  - $dns_name
+  - $db_public_ip
 notifications:
   email:
     recipients:
