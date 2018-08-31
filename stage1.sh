@@ -1,5 +1,5 @@
 set -eu -o pipefail
-sudo apt-get update -y &&
+sudo apt-get update &&
 sudo apt-get install python3.6 &&
 pip install pyyaml &&
 sudo apt-get update -y &&
