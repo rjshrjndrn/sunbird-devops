@@ -32,8 +32,7 @@ install:
   - pip install pyyaml
 before_script: 
 - python createConfigYml.py
-- ssh-keyscan -H $dns_host >> ~/.ssh/known_hosts
-- ssh-keyscan -H $db_public_ip >> ~/.ssh/known_hosts
+- bash stage0.sh
 script:
   - bash install.sh
   # - echo $(readlink -f ciTestKey.pem)
