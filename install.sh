@@ -8,15 +8,15 @@ scp /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_na
 scp /home/travis/build/rajeevsathish/sunbird-devops/config ubuntu@$dns_name:.
 scp /home/travis/build/rajeevsathish/sunbird-devops/getSSOKey.py ubuntu@$dns_name:.
 scp /home/travis/build/rajeevsathish/sunbird-devops/stage1.sh ubuntu@$dns_name:.
-ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/stage1.sh $repo
+ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null ubuntu@$dns_name bash /home/ubuntu/stage1.sh $repo
 if [ $? -eq 0 ]
   then
     echo "Stage 1 SUCCESSFULL"
-    ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/sunbird-devops/stage2.sh
+    ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null ubuntu@$dns_name bash /home/ubuntu/sunbird-devops/stage2.sh
     if [ $? -eq 0 ]
       then
         echo "Stage 2 SUCCESSFULL"
-        ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem ubuntu@$dns_name bash /home/ubuntu/sunbird-devops/stage3.sh
+        ssh -i /home/travis/build/rajeevsathish/sunbird-devops/ciTestKey.pem -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null ubuntu@$dns_name bash /home/ubuntu/sunbird-devops/stage3.sh
         if [$? -eq 0]
           then
             echo "Stage 3 SUCCESSFULL"
