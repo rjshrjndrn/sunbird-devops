@@ -1,8 +1,8 @@
 set -eu -o pipefail
-sudo add-apt-repository ppa:jonathonf/python-2.7 &&
-sudo apt-get -y update &&
+sudo add-apt-repository ppa:jonathonf/python-3.6 &&
+sudo apt-get update -y &&
 sudo apt-get install git -y &&
-sudo apt-get install python2.7 python2.7 libpython2.7 -y &&
+sudo apt-get install python3.6 python3.6 libpython3.6 python3-pip -y &&
 pip install pyyaml &&
 git clone $1 &&
 cp config sunbird-devops/deploy &&
