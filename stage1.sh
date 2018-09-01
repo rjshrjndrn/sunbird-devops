@@ -1,8 +1,8 @@
 set -eu -o pipefail
 sudo add-apt-repository ppa:jonathonf/python-2.7 &&
-sudo apt-get update -y &&
+sudo apt-get -y update &&
 sudo apt-get install git -y &&
-sudo apt-get install -f python2.7 python2.7 libpython2.7 &&
+sudo apt-get install python2.7 python2.7 libpython2.7 -y &&
 pip install pyyaml &&
 git clone $1 &&
 cp config sunbird-devops/deploy &&
