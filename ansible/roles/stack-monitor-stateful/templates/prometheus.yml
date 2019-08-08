@@ -44,6 +44,11 @@ scrape_configs:
         regex: '^\s*$'
         action: drop
 
+  # Metrics gathering for cassandra
+  - job_name: 'cassandra'
+    static_configs:
+      - targets: ['11.2.3.59:7070']
+
   - job_name: 'alertmanager'
     metrics_path: /alertmanager/metrics
     dns_sd_configs:
