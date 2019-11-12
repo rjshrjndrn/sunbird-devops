@@ -3,6 +3,7 @@
 # Author: Rajesh Rajendran<rjshrjndrn@gmail.com>
 
 # Creating DB Scehma
+ls -la /badger/code
 /badger/code/manage.py migrate
 
 # Running server
