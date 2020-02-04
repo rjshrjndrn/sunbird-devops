@@ -32,12 +32,23 @@ scrape_configs:
       match[]:
         - '{__name__=~"nginx_.*"}'
         - '{__name__=~"kong_.*"}'
-        - '{__name__=~"node_.*"}'
     static_configs:
       {# groups[alertmanager] and prometheus are same machines #}
       {# and alertmanagers will be unique per swarm #}
       # This empty line make sure the indentation is correct
       - targets: [ '{{groups['alertmanager']|join(':9090\', \'')}}:9090', '{{groups['alertmanager_stateful']|join(':19090\', \'')}}:19090' ]
+  - job_name: 'k8s-federate'
+    metrics_path: /federate
+    honor_labels: true
+    params:
+      match[]:
+        - '{__name__=~"nginx_.*"}'
+        - '{__name__=~"kong_.*"}'
+    static_configs:
+      {# groups[alertmanager] and prometheus are same machines #}
+      {# and alertmanagers will be unique per swarm #}
+      # This empty line make sure the indentation is correct
+      - targets: [ '{{ prometheus_kubernetes_endpoint }}' ]
 
   - job_name: 'vm-node-exporter'
     static_configs:
