@@ -49,7 +49,7 @@ spec:
         summary: DerivedDeDuplication lag is Critical
 
     - alert: DeviceProfileUpdater lag
-      expr: sum(samza_pipeline_metrics_consumer_lag{job_name= "DeviceProfileUpdater"}) > {{ .Values.deevice_profileupdater_threshold }}
+      expr: sum(samza_pipeline_metrics_consumer_lag{job_name= "DeviceProfileUpdater"}) > {{ .Values.device_profileupdater_threshold }}
       for: 5m
       labels:
         severity: critical
