@@ -4,13 +4,13 @@
 set -eo pipefail
 
 # Downloading deps
-wget https://codeload.github.com/simplresty/ngx_devel_kit/tar.gz/v0.3.0 -O ngx_devel_kit_0_3_0.tar.gz
-wget https://codeload.github.com/openresty/luajit2/tar.gz/v2.1-20190626 -O luajit_2_1.tar.gz
-wget https://codeload.github.com/openresty/lua-nginx-module/tar.gz/v0.10.15 -O ngx_lua.tar.gz
+wget https://github.com/vision5/ngx_devel_kit/archive/v0.3.1.tar.gz -O ngx_devel_kit_0_3_1.tar.gz
+wget https://codeload.github.com/openresty/luajit2/tar.gz/v2.1-20200102 -O luajit_2_1.tar.gz
+wget https://github.com/openresty/lua-nginx-module/archive/v0.10.16rc5.tar.gz -O ngx_lua.tar.gz
 
 # Creating deps directory
 mkdir -p nginx_devel_kit luajit nginx_lua
-tar --strip-components=1 -xf ngx_devel_kit_0_3_0.tar.gz -C nginx_devel_kit
+tar --strip-components=1 -xf ngx_devel_kit_0_3_1.tar.gz -C nginx_devel_kit
 tar --strip-components=1 -xf luajit_2_1.tar.gz -C luajit
 tar --strip-components=1 -xf ngx_lua.tar.gz -C nginx_lua
 
