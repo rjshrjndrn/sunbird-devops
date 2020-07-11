@@ -1,12 +1,13 @@
 ---
-- hosts: "{{ remote }}"
+- hosts: "bastion:{{ remote }}"
+  gather_facts: false
   become: yes
   roles:
     - add_user
   tags:
     - add-user
 
-- hosts: "{{ remote }}"
+- hosts: "bastion:{{ remote }}"
   become: yes
   tasks:
     - user: name="{{ ssh_user }}" state=absent remove=yes
