@@ -118,11 +118,13 @@ proxyconfig: |
         local h = ngx.req.get_headers()
         ngx.log(ngx.WARN, "Deviceid: ", h["x-device-id"], "  Channelid: ", h["x-channel-id"], "  Appid: ", h["x-app-id"])
       }
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://kong;
     }
     location /v3/device/register {
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://kong;
       proxy_set_header Connection "";
       rewrite ^/v3/device/register/(.*) /v3/device/register/$1 break;
@@ -195,13 +197,15 @@ proxyconfig: |
       proxy_set_header X-Scheme $scheme;
       proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
       proxy_set_header X-Forwarded-Proto $scheme;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://player;
     }
     location /auth/ {
       rewrite ^/auth/(.*) /auth/$1 break;
       proxy_set_header Connection "";
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://keycloak;
       proxy_set_header Host $host;
       proxy_set_header X-Real-IP {{ nginx_client_public_ip_header | d('$remote_addr') }};
@@ -232,7 +236,8 @@ proxyconfig: |
       proxy_send_timeout 60;
       proxy_read_timeout 70;
       proxy_http_version 1.1;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://player;
   }
     # This is Caching mechanism for POST requests
@@ -259,7 +264,8 @@ proxyconfig: |
       proxy_send_timeout 60;
       proxy_read_timeout 70;
       proxy_http_version 1.1;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://kong;
   }
 
@@ -285,7 +291,8 @@ proxyconfig: |
       proxy_send_timeout 60;
       proxy_read_timeout 70;
       proxy_http_version 1.1;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://kong;
   }
 
@@ -320,7 +327,8 @@ proxyconfig: |
         local h = ngx.req.get_headers()
         ngx.log(ngx.WARN, "Deviceid: ", h["x-device-id"], "  Channelid: ", h["x-channel-id"], "  Appid: ", h["x-app-id"])
       }
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://kong;
     }
     # Oauth2 config
@@ -329,7 +337,8 @@ proxyconfig: |
       proxy_set_header X-Real-IP               {{ nginx_client_public_ip_header | d('$remote_addr') }};
       proxy_set_header X-Scheme                $scheme;
       proxy_set_header X-Auth-Request-Redirect $request_uri;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://oauth2-proxy.logging.svc.cluster.local;
     }
     location = /oauth2/auth {
@@ -339,7 +348,8 @@ proxyconfig: |
       # nginx auth_request includes headers but not body
       proxy_set_header Content-Length   "";
       proxy_pass_request_body           off;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://oauth2-proxy.logging.svc.cluster.local;
     }
     location /dashboard/ {
@@ -356,12 +366,14 @@ proxyconfig: |
       # if you enabled --cookie-refresh, this is needed for it to work with auth_request
       auth_request_set $auth_cookie $upstream_http_set_cookie;
       add_header Set-Cookie $auth_cookie;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass $target;
     }
     location /grafana/ {
       rewrite ^/grafana/(.*) /$1 break;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://prometheus-operator-grafana.monitoring.svc.cluster.local;
     }
     location /encryption/ {
@@ -373,7 +385,8 @@ proxyconfig: |
     proxy_send_timeout 30;
     proxy_read_timeout 40;
       proxy_set_header    X-Forwarded-For   $http_x_forwarded_for;
-    proxy_set_header X-Request-ID $request_id;
+    proxy_set_header X-Request-ID $sb_request_id;
+    proxy_set_header X-Trace-ID false;
     proxy_pass http://encryption;
     }
     location /badging/ {
@@ -385,7 +398,8 @@ proxyconfig: |
       proxy_send_timeout 30;
       proxy_read_timeout 40;
       proxy_set_header    X-Forwarded-Proto $scheme;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://badger-service.{{ namespace }}.svc.cluster.local:8004;
   }
     location ~* ^/assets/public/(.*) {
@@ -422,7 +436,8 @@ proxyconfig: |
       proxy_intercept_errors on;
           add_header             Access-Control-Allow-Origin "*";
           add_header             Access-Control-Allow-Methods GET;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass             https://$bucket/$url_full;
   }
    location ~* ^/content/preview/(.*) {
@@ -455,7 +470,8 @@ proxyconfig: |
       proxy_intercept_errors on;
       add_header             Access-Control-Allow-Origin "*" ;
       add_header             Access-Control-Allow-Methods GET;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass             https://$s3_bucket/v3/preview/$url_full;
   }
   
@@ -470,7 +486,8 @@ proxyconfig: |
       proxy_set_header    X-Forwarded-Proto $scheme;
       proxy_set_header Connection "";
       proxy_http_version 1.1;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://player;
     }
   location ~* ^/content-editor/(.*) {
@@ -503,7 +520,8 @@ proxyconfig: |
       proxy_intercept_errors on;
       add_header             Access-Control-Allow-Origin "*" ;
       add_header             Access-Control-Allow-Methods GET;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass             https://$s3_bucket/content-editor/$url_full;
   }
     location ~* ^/collection-editor/(.*) {
@@ -536,7 +554,8 @@ proxyconfig: |
       proxy_intercept_errors on;
       add_header             Access-Control-Allow-Origin "*" ;
       add_header             Access-Control-Allow-Methods GET;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass             https://$s3_bucket/collection-editor/$url_full;
   }
     location ~* ^/generic-editor/(.*) {
@@ -569,7 +588,8 @@ proxyconfig: |
       proxy_intercept_errors on;
       add_header             Access-Control-Allow-Origin "*" ;
       add_header             Access-Control-Allow-Methods GET;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass             https://$s3_bucket/generic-editor/$url_full;
   }
   location ~* ^/content-plugins/(.*) {
@@ -606,7 +626,8 @@ proxyconfig: |
          proxy_intercept_errors on;
          add_header             Access-Control-Allow-Origin "*";
          add_header             Access-Control-Allow-Methods GET;
-         proxy_set_header X-Request-ID $request_id;
+         proxy_set_header X-Request-ID $sb_request_id;
+         proxy_set_header X-Trace-ID false;
          proxy_pass             https://$s3_bucket/content-plugins/$url_full;
   }
     location /thirdparty {
@@ -629,7 +650,8 @@ proxyconfig: |
       proxy_set_header    X-Forwarded-Proto $scheme;
       proxy_set_header Connection "";
       proxy_http_version 1.1;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://player;
     }
   location ~* ^/desktop/(.*) {
@@ -666,7 +688,8 @@ proxyconfig: |
          proxy_intercept_errors on;
          add_header             Access-Control-Allow-Origin "*";
          add_header             Access-Control-Allow-Methods GET;
-         proxy_set_header X-Request-ID $request_id;
+         proxy_set_header X-Request-ID $sb_request_id;
+         proxy_set_header X-Trace-ID false;
          proxy_pass             https://$offline_bucket/$url_full;
   }
     location / {
@@ -680,11 +703,13 @@ proxyconfig: |
       proxy_set_header    X-Forwarded-Proto $scheme;
       proxy_set_header Connection "";
       proxy_http_version 1.1;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://player;
     }
     location /v3/device/register {
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://kong;
       proxy_set_header Connection "";
       rewrite ^/v3/device/register/(.*) /v3/device/register/$1 break;
@@ -697,7 +722,8 @@ proxyconfig: |
       proxy_http_version 1.1;
     }
     location /action/data/v3/metrics {
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://kong;
       proxy_set_header Connection "";
       rewrite ^/action/data/v3/metrics/(.*) /data/v3/metrics/$1 break;
@@ -725,7 +751,8 @@ proxyconfig: |
       proxy_set_header X-Scheme $scheme;
       proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
       proxy_set_header X-Forwarded-Proto $scheme;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://player;
     }
 
@@ -750,7 +777,8 @@ proxyconfig: |
       proxy_send_timeout 60;
       proxy_read_timeout 70;
       proxy_http_version 1.1;
-      proxy_set_header X-Request-ID $request_id;
+      proxy_set_header X-Request-ID $sb_request_id;
+      proxy_set_header X-Trace-ID false;
       proxy_pass http://kong;
     }
 
@@ -803,13 +831,20 @@ nginxconfig: |
       log_format  main  '{{ nginx_client_public_ip_header | d('$remote_addr') }} - $remote_user [$time_local] '
                         '"$request" $status $body_bytes_sent '
                         '$request_time $upstream_response_time $pipe'
-                        '"$http_referer" "$http_user_agent" $request_id';
+                        '"$http_referer" "$http_user_agent" $sb_request_id';
 
       access_log  /var/log/nginx/access.log  main;
 
       # Shared dictionary to store metrics
       lua_shared_dict prometheus_metrics 100M;
       lua_package_path "/etc/nginx/lua_modules/?.lua";
+
+      # Defining request_id
+      # If the client send request_id it should be preffered over the default one
+      map $http_x_request_id $sb_request_id {
+        default  $http_x_request_id;
+        ''  $request_id;
+      }
 
       # Defining upstream cache status for nginx metrics
       map $upstream_cache_status $cache_status {
@@ -867,6 +902,7 @@ nginxconfig: |
           keepalive 1000;
       }
 
+      include /etc/nginx/defaults.d/*.conf;
       include /etc/nginx/conf.d/*.conf;
 
       # local caching for images and files
