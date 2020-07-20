@@ -101,6 +101,36 @@ maxScrapFrequencyInSec:
     - org:apache:cassandra:metrics:threadpools:.*:activetasks:value
     - org:apache:cassandra:metrics:threadpools:.*:pendingtasks:value
     - org:apache:cassandra:metrics:threadpools:.*:totalblockedtasks:count
+    - org:apache:cassandra:metrics:table:.*:.*:readlatency:.*
+    - org:apache:cassandra:metrics:table:.*:.*:writelatency:.*
+    - org:apache:cassandra:metrics:table:.*:.*:rangelatency:.*
+    - org:apache:cassandra:metrics:table:.*:.*:sstablesperreadhistogram:.*
+    - org:apache:cassandra:metrics:table:.*:.*:livesstablecount:value
+    - org:apache:cassandra:metrics:table:.*:.*:pendingcompactions:value
+    - org:apache:cassandra:metrics:table:.*:.*:pendingflushes:count
+    - org:apache:cassandra:metrics:table:.*:.*:compactionbyteswritten:count
+    - org:apache:cassandra:metrics:streaming:totalincomingbytes:count
+    - org:apache:cassandra:metrics:streaming:totaloutgoingbytes:count
+    - org:apache:cassandra:metrics:table:.*:.*:tombstonescannedhistogram:.*
+    - org:apache:cassandra:metrics:commitlog:completedtasks:value
+    - org:apache:cassandra:metrics:table:.*:.*:memtableswitchcount:.*"
+
+  60:
+    - org:apache:cassandra:metrics:droppedmessage:.*:oneminuterate
+    - org:apache:cassandra:metrics:connection:totaltimeouts:oneminuterate
+    - org:apache:cassandra:metrics:table:.*:.*:readlatency:oneminuterate
+    - org:apache:cassandra:metrics:table:.*:.*:keycachehitrate:value
+    - org:apache:cassandra:metrics:cache:chunkcache:oneminutehitrate:value
+    - org:apache:cassandra:metrics:connection:totaltimeouts:oneminuterate
+    - org:apache:cassandra:metrics:table:.*:.*:writelatency:oneminuterate
+    - org:apache:cassandra:metrics:commitlog:waitingoncommit:oneminuterate
+  120:
+    - org:apache:cassandra:metrics:table:.*:.*:rowcachehit:count
+    - org:apache:cassandra:metrics:table:.*:.*:rowcachemiss:count
+    - org:apache:cassandra:metrics:threadpools:.*:completedtasks:value
+    - org:apache:cassandra:metrics:table:.*:.*:allmemtablesheapsize:value
+    - org:apache:cassandra:metrics:table:.*:.*:allmemtableslivedatasize:value
+    - org:apache:cassandra:metrics:table:$keyspace:.*:waitingonfreememtablespace:max
 
   # Refresh those metrics only every hour as it is costly for cassandra to retrieve them
   3600:
