@@ -427,6 +427,9 @@ dashboards2:
        file: dashboards/api-manager-beta.json
      dashboardkong4:
        file: dashboards/api-manager-req-resp-aggregated.json
+   nginx:
+     nginxdetailed:
+       file: dashboards/nginx-detailed.json
 
   #   prometheus-stats:
   #     gnetId: 2
