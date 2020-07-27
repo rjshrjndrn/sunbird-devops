@@ -16,6 +16,7 @@ import (
 	"time"
 
 	kafka "github.com/segmentio/kafka-go"
+	_ "github.com/segmentio/kafka-go/snappy"
 )
 
 var kafkaReader *kafka.Reader
@@ -177,12 +178,12 @@ func serve(w http.ResponseWriter, r *http.Request) {
 				break
 			}
 			fmt.Printf("topic: %q partition: %v offset: %v\n", m.Topic, m.Partition, m.Offset)
-			go func(ctx context.Context) {
+			go func(ctx context.Context, m kafka.Message) {
 				if err := metricsCreation(ctx, m); err != nil {
 					fmt.Printf("errored out metrics creation; err:  %s\n", err)
 					return
 				}
-			}(ctx)
+			}(ctx, m)
 		}
 	}(ctx, kafkaReader)
 	for {
