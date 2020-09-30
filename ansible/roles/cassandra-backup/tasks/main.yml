@@ -20,7 +20,7 @@
   shell: python3 cassandra_backup.py --snapshotname "{{ cassandra_backup_gzip_file_name }}" "{{additional_arguments|d('')}}"
   args:
     chdir: /data/cassandra/backup
-  async: 7200
+  async: 14400
   poll: 30
 
 - name: Check doc_root path
