@@ -1,0 +1,4 @@
+---
+- host: test-kitchen
+  tasks:
+  - name: test
