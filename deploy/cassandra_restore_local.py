@@ -64,11 +64,11 @@ def nodetoolRefresh(ks, table):
 futures = []
 # nodetool refresh
 # Running parellel node tool refresh
-with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as executor:
+with concurrent.futures.ProcessPoolExecutor(max_workers=args.workers) as executor:
     for ks, tables in ks_tb_pair.items():
         for table in tables:
-            tmp_arr = [ks, table]
-            futures.append( executor.submit( lambda p: nodetoolRefresh(*p), tmp_arr))
+            futures.append( executor.submit(nodetoolRefresh, ks, table))
+print("Submitted all jobs")
 # Checking status of the copy operation
 for future in concurrent.futures.as_completed(futures):
     try:
