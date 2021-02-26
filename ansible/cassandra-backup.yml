@@ -2,7 +2,7 @@
 #  If we club both taking snapshot and upload the data, then the
 #  interval of snapshots b/w nodes will be very high; Which might lead
 #  to data discrepancies
-- hosts: cassandra
+- hosts: cassandra-nishtha
   become: yes
   tasks:
   - name: taking cassandra snapshots
@@ -14,7 +14,7 @@
 # We can take the snapshot and compress it and upload it
 # This will take some cpu and memory in the nodes
 # Because of that we're running it serially, so that it won't affect the perfomance
-- hosts: cassandra
+- hosts: cassandra-nishtha
   become: yes
   vars_files:
     - ['{{ inventory_dir }}/secrets.yml']
