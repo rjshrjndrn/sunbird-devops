@@ -99,6 +99,7 @@ postgres:
   db_admin_password: "{{core_vault_postgres_password}}"
 
 # Azure account related vars
+sunbird_azure_public_storage_account_name: "{{ sunbird_public_storage_account_name }}"
 upstream_url: "{{sunbird_azure_public_storage_account_name}}.blob.core.windows.net/{{sunbird_content_azure_storage_container}}" # Proxy url to get /assets/public
 plugin_upstream_url: "{{upstream_url}}"
 azure_plugin_storage_account_name: "{{sunbird_azure_public_storage_account_name}}"
